@@ -1,0 +1,26 @@
+export default [
+	{
+		title:'首页',
+		key:'/home'
+	},
+	{
+		title:'数据中心',
+		key:'/data'
+	},
+	{
+		title:'建模中心',
+		key:'/model'
+	},
+	{
+		title:'模型应用中心',
+		key:'/serving'
+	},
+	{
+		title:'数据接入中心',
+		key:'/stream'
+	},
+	{
+		title:'监控中心',
+		key:'/monitor'
+	},
+]
