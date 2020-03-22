@@ -41,25 +41,25 @@ export default class Home extends React.Component{
 				    <div className="carousels">
 					<div className="card1">
 				      <Icon className="svg" component={Guangqian} />
-					  <span>通过光纤传回数据</span>
+					  <span>光纤传输数据</span>
 				    </div>
 					</div>
 				    <div className="carousels">
 					<div className="card1">
 				      <Icon className="svg" component={Model} />
-					  <span>通过样本数据建模</span>
+					  <span>样本数据建模</span>
 				    </div>
 					</div>
 					<div className="carousels">
 					<div className="card1">
 					  <Icon className="svg" component={Stream} />
-					  <span>流式获取数据</span>
+					  <span>流式数据读取</span>
 					</div>
 					</div>
 					<div className="carousels">
 					<div className="card1">
 					  <Icon className="svg" component={Predict}  />
-					  <span>通过模型对数据进行预估</span>
+					  <span>数据处理模型预估</span>
 					</div>
 					</div>
 					<div className="carousels">
@@ -70,7 +70,7 @@ export default class Home extends React.Component{
 					</div>
 				  </Carousel>
 				
-				<div style={{textAlign:'center'}}>
+				<div className="home-text">
 					<br />
 					<span className="span1">Audio Deep Flow</span>
 					<br /><br />

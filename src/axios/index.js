@@ -12,7 +12,7 @@ export default class Axios{
 				if(response.status === 'success'){
 					resolve(response);
 				}else{
-					reject(response.message);
+					reject(response);
 				}
 			})
 		})
@@ -21,11 +21,35 @@ export default class Axios{
 	static get(url,params){
 		return new Promise((resolve,reject)=>{
 			axios.get(url,params).then((response)=>{
-				if(response.data.resultCode.code < 300){
+				// if(response.data.resultCode.code < 300){
 					resolve(response);
-				}else{
-					reject(response.message);
-				}
+				// }else{
+				// 	reject(response);
+				// }
+			})
+		});
+	}
+	
+	static delete(url,params){
+		return new Promise((resolve,reject)=>{
+			axios.delete(url,params).then((response)=>{
+				// if(response.data.resultCode.code < 300){
+					resolve(response);
+				// }else{
+				// 	reject(response);
+				// }
+			})
+		});
+	}
+	
+	static post(url,params){
+		return new Promise((resolve,reject)=>{
+			axios.post(url,params).then((response)=>{
+				// if(response.data.resultCode.code < 300){
+					resolve(response);
+				// }else{
+				// 	reject(response);
+				// }
 			})
 		});
 	}

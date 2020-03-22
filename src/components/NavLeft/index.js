@@ -3,7 +3,8 @@ import {Menu} from 'antd'
 import {Link} from 'react-router-dom';
 import'./index.less'
 import Icon from '@ant-design/icons';
-
+import {connect} from 'react-redux'
+import {switchMenu} from './../../redux/action'
 
 import Alarm from './../../icon/alarmb.svg'; 
 import Predict from './../../icon/predictb.svg'; 
@@ -20,26 +21,14 @@ import K8s from './../../icon/k8s.svg';
 
 
 const { SubMenu } = Menu;
-export default class NavLeft extends React.Component{
+class NavLeft extends React.Component{
 	constructor(props){
 	    super(props);
-	    // this.state={
-	    //     currentHash: window.location.hash,
-	    //     navFlag: '',
-	    // }
-	    // this.handleClick = this.handleClick.bind(this);
-		// this.toggleCollapsed = this.toggleCollapsed.bind(this);
+	    this.state={
+	        selectedKeys: ['1'],
+	    }
 	}
 	
-	// handleClick(arg) {
-	// 	console.log(arg);
-	//     this.setState(prevState => ({
-	//         navFlag: arg,
-	//         currentHash:''
-	//     }));
-		
-	//   }
-	  
 	componentWillMount(){
 		// const menuTreeNode = this.renderMenu(MenuConfig);
 		// this.setState({
@@ -47,18 +36,21 @@ export default class NavLeft extends React.Component{
 		// })
 	}
 	
-	// renderMenu = (data) => {
-	// 	return data.map((item) => {
-	// 		if(item.children){
-	// 			return (
-	// 				<SubMenu title={item.title} key={item.key}>
-	// 					{this.renderMenu(item.children)}
-	// 				</SubMenu>
-	// 			)
-	// 		}
-	// 		return <Menu.Item title={item.title} key={item.key} />
-	// 	})
-	// }
+	componentWillReceiveProps(nextProps){
+		console.log("componentWillReceiveProps")
+		// console.log(nextProps)
+		this.setState({
+			selectedKeys:nextProps.selectedKeys
+		})
+	}
+	
+	menuClick = (item) => {
+		const {dispatch} = this.props;
+		dispatch(switchMenu(item.item.props.title))
+		this.setState({
+			selectedKeys:item.keyPath
+		})
+	}
 	
 	render(){
 		return (
@@ -69,40 +61,42 @@ export default class NavLeft extends React.Component{
 				</div>
 				<div className="">
 					    <Menu 
+							selectedKeys={this.state.selectedKeys}
 							mode="inline"
 							theme="dark"
 							defaultSelectedKeys={['1']}
 							defaultOpenKeys={['sub1']}
+							onClick={this.menuClick}
 					    > 
 						
 							<Menu.Item title="首页" key="1" >
 							  <Icon component={Home} />
 							  <span>首页</span>
-							  <Link to="/ADF/Home"></Link>
+							  <Link to="/Home"></Link>
 							</Menu.Item>
 							
 							<Menu.Item title="数据中心" key="2">
 							  <Icon component={TableIcon} />
 							  <span>数据中心</span>
-							  <Link to="/ADF/Data"></Link>
+							  <Link to="/Data"></Link>
 							</Menu.Item>
 							
 							<Menu.Item title="建模中心" key="3">
 							<Icon component={Model} />
 							  <span>建模中心</span>
-							  <Link to="/ADF/Models"></Link>
+							  <Link to="/Models"></Link>
 							</Menu.Item>
 							
 							<Menu.Item title="模型应用中心" key="4">
 							<Icon component={Stream} />
 							  <span>模型应用中心</span>
-							  <Link to="/ADF/Serving"></Link>
+							  <Link to="/Serving"></Link>
 							</Menu.Item>
 							
 							<Menu.Item title="数据接入中心" key="5">
 							<Icon component={Predict} />
 							  <span>数据接入中心</span>
-							  <Link to="/ADF/Stream"></Link>
+							  <Link to="/Stream"></Link>
 							</Menu.Item>
 							
 						
@@ -115,14 +109,14 @@ export default class NavLeft extends React.Component{
 								</span>
 							  }
 							>
-							 <Menu.Item key="7">
+							 <Menu.Item title="告警监控" key="7">
 							 <Icon component={PieIcon} />
-							  <Link to="/ADF/Moniter">告警监控</Link>
+							  <Link to="/Moniter">告警监控</Link>
 							  </Menu.Item>
 							
-							  <Menu.Item key="8">
+							  <Menu.Item title="集群监控" key="8">
 							  <Icon component={K8s} />
-							  <Link to="/ADF/Moniter">集群监控</Link>
+							  <Link to="/K8sMoniter">集群监控</Link>
 							  </Menu.Item>
 							
 							</SubMenu>
@@ -136,3 +130,10 @@ export default class NavLeft extends React.Component{
 	}
 	
 }
+
+const mapStateToProps = state =>{
+	return{
+		selectedKeys: state.selectedKeys
+	}
+};
+export default connect(mapStateToProps)(NavLeft);
