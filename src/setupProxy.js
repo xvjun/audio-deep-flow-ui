@@ -1,11 +1,11 @@
 const { createProxyMiddleware } = require('http-proxy-middleware');
-
+// require("../public/config/ip.js")
 module.exports = function(app) {
-	app.use(createProxyMiddleware('/api/v1', {
-	    target: 'http://172.27.233.58:30086',
-	    secure: false,
-		changeOrigin: true,
-	   }));
+	// app.use(createProxyMiddleware('/api/v1', {
+	//     target: "http://172.27.233.58:30086",
+	//     secure: false,
+	// 	changeOrigin: true,
+	//    }));
 	
   // app.use(createProxyMiddleware('/api/v1/dataprocess', {
   //     target: 'http://172.27.233.58:30081',
